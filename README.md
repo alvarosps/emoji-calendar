@@ -1,31 +1,30 @@
-# Base React Project
+# Web3 Emoji Calendar
 
-This is a base project template for a React application, with the latest versions of React, Webpack, Babel, ESLint, and Prettier. Created by @alvarosps
+This is a basic application using ReactJS, Webpack, Babel, ESLint and Prettier, that connects to a Web3 Metamask wallet (_you need to have ethereum in your browser for this application to work_).
+It receives a hash in the URL, that the application will convert into emoji(s) , and allow the user to choose a date, connect to the Metamask wallet, validate and sign the object data. Then it allows the user to see the emojis added in each day in the main page.
 
 ## Getting Started
 
 To get started with the project, follow these steps:
 
 1. Install the dependencies:
-`npm install`
+   `npm install`
 
 2. Start the development server:
-`npm start`
+   `npm start`
 
-### Testing
-`npm run test`
+3. Try to add emojis to the calendar, you can access the main page at https://localhost:3000.
+
+-   You can use this hash as example, which will generate a list of emojis: https://localhost:3000/8J+klPCfmITwn46X
 
 ### ESLint checks and ESLint Fixes
-- `npm run lint`
-- `npm run lint:fix`
+
+-   `npm run lint`
+-   `npm run lint:fix`
 
 ### Prettier checks and Prettier Fixes
-- `npm run prettier`
-- `npm run prettier:fix`
 
-## Deployment
+-   `npm run prettier`
+-   `npm run prettier:fix`
 
-- This will be specific to the project and where it is being deployed.
-- For now, we have a build script, and a webpack suited for production.
-- Might need to add more scripts and files for deployment and hot-reloading in deployment (depends on the platform)
-`npm run build`
+Created by @alvarosps
