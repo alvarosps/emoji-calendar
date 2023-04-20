@@ -13,9 +13,9 @@ To get started with the project, follow these steps:
 2. Start the development server:
    `npm start`
 
-3. Try to add emojis to the calendar, you can access the main page at https://localhost:3000.
+3. Try to add emojis to the calendar, you can access the main page at http://localhost:3000.
 
--   You can use this hash as example, which will generate a list of emojis: https://localhost:3000/8J+klPCfmITwn46X
+-   You can use this hash as example, which will generate a list of emojis: http://localhost:3000/8J+klPCfmITwn46X
 
 ### ESLint checks and ESLint Fixes
 
