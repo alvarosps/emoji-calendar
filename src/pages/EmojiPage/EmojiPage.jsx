@@ -71,6 +71,7 @@ const EmojiPage = () => {
                 date: new Date().getTime(),
                 emojis,
                 signedMessage,
+                hash,
             };
             dispatch(addEntry(entry));
             setSignedMessage('');

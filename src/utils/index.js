@@ -341,15 +341,23 @@ const emojis = [
 ];
 
 const hashToEmoji = (hash) => {
-    const buffer = crypto.createHash('sha256').update(hash).digest();
-    const emojisFromHash = [];
+    const cachedResult = localStorage.getItem(hash);
 
-    for (let i = 0; i < buffer.length; i += 2) {
-        const emojiIndex = buffer.readUInt16BE(i) % emojis.length;
-        emojisFromHash.push(emojis[emojiIndex]);
+    if (cachedResult) {
+        return JSON.parse(cachedResult);
+    } else {
+        const buffer = crypto.createHash('sha256').update(hash).digest();
+        const emojisFromHash = [];
+
+        for (let i = 0; i < buffer.length; i += 2) {
+            const emojiIndex = buffer.readUInt16BE(i) % emojis.length;
+            emojisFromHash.push(emojis[emojiIndex]);
+        }
+
+        localStorage.setItem(hash, JSON.stringify(emojisFromHash));
+
+        return emojisFromHash;
     }
-
-    return emojisFromHash;
 };
 
 export { hashToEmoji };
