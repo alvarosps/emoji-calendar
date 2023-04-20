@@ -8,7 +8,7 @@ import './Home.scss';
 const Home = () => {
     const [value, setValue] = useState(new Date());
     const entries = useSelector((state) => state.entries);
-    console.log(entries);
+
     const navigate = useNavigate();
 
     const getEntriesForSelectedDate = () => {
