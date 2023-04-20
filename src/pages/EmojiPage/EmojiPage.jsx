@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Web3 from 'web3';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addEntry } from '../../redux/actions';
 import { hashToEmoji } from '../../utils';
+import './EmojiPage.scss';
 
 let web3;
 if (window.ethereum) {
@@ -15,9 +16,17 @@ const EmojiPage = () => {
     const [emojis, setEmojis] = useState([]);
     const [signedMessage, setSignedMessage] = useState('');
     const [walletConnected, setWalletConnected] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    });
     const dispatch = useDispatch();
-    const entries = useSelector((state) => state.entries);
-    console.log('entries', entries);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         setEmojis(hashToEmoji(hash));
     }, [hash]);
@@ -67,25 +76,38 @@ const EmojiPage = () => {
 
         if (recoveredAddress.toLowerCase() === signerAddress.toLowerCase()) {
             // The signature is valid, add the entry to the calendar
+            const [year, month, day] = selectedDate.split('-');
+            const correctedDate = new Date(year, month - 1, day);
             const entry = {
-                date: new Date().getTime(),
+                date: correctedDate.getTime(),
                 emojis,
                 signedMessage,
                 hash,
             };
             dispatch(addEntry(entry));
             setSignedMessage('');
+            navigate('/');
         } else {
             alert('The signature is not valid.');
         }
     };
 
     return (
-        <div>
-            {emojis.map((emoji, index) => (
-                <span key={index}>{emoji}</span>
-            ))}
+        <div className="container emoji-container">
+            <div className="emoji-page">
+                {emojis.map((emoji, index) => (
+                    <span key={index}>{emoji}</span>
+                ))}
+            </div>
             <br />
+            <label htmlFor="date-picker">Choose a date:</label>
+            <input
+                type="date"
+                id="date-picker"
+                className="date-picker"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+            />
             {!walletConnected && (
                 <button onClick={connectWallet}>Connect Wallet</button>
             )}

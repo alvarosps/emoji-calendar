@@ -3,11 +3,12 @@ import Calendar from 'react-calendar';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
+import './Home.scss';
 
 const Home = () => {
     const [value, setValue] = useState(new Date());
     const entries = useSelector((state) => state.entries);
-
+    console.log(entries);
     const navigate = useNavigate();
 
     const getEntriesForSelectedDate = () => {
@@ -26,13 +27,21 @@ const Home = () => {
     };
 
     return (
-        <div>
-            <Calendar value={value} onChange={setValue} />
-            <div>
+        <div className="container">
+            <div className="calendar-container">
+                <Calendar value={value} onChange={setValue} />
+            </div>
+            <div className="entries">
                 {getEntriesForSelectedDate().map((entry, index) => (
-                    <div key={index} onClick={() => handleClick(entry)}>
+                    <div
+                        key={index}
+                        className="entry"
+                        onClick={() => handleClick(entry)}
+                    >
                         {entry.emojis.map((emoji, emojiIndex) => (
-                            <span key={emojiIndex}>{emoji}</span>
+                            <span key={emojiIndex} className="emoji">
+                                {emoji}
+                            </span>
                         ))}
                     </div>
                 ))}

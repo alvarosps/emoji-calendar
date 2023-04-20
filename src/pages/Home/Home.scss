@@ -1,0 +1,33 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.entries {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.entry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #f7f7f7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: #e9e9e9;
+    }
+}
+
+.emoji {
+    font-size: 2rem;
+}
